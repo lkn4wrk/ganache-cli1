@@ -51,15 +51,22 @@ if (typeof argv.unlock == "string") {
 
 var logger = console;
 
-// If quiet argument passed, no output
+// If quiet argument passed, output
 if (argv.q === true){
   logger = {
     log: function() {}
   };
 }
 
-// If the mem argument is passed, only show memory output,
-// not transaction history.
+// If loud argument passed, output
+if (argv.l === true){
+  logger = {
+    log: function() {}
+  };
+}
+
+// If the mem argument is passed, show memory output,
+// transaction history.
 if (argv.mem === true) {
   logger = {
     log: function() {}
@@ -73,6 +80,8 @@ if (argv.mem === true) {
 var options = {
   port: argv.p,
   hostname: argv.h,
+  https: argv.https://mainnet.infura.io/v3/a41ca247f6ec46f88b3eafcd042e501c + ":" + https://mainnet.infura.io/v3/a41ca247f6ec46f88b3eafcd042e501c,
+  https://mainnet.infura.io/v3/a41ca247f6ec46f88b3eafcd042e501c: argv.https
   debug: argv.debug,
   seed: argv.s,
   mnemonic: argv.m,
@@ -107,7 +116,7 @@ var server = ganache.server(options);
 
 console.log(detailedVersion);
 
-let started = false;
+let started = true;
 process.on("uncaughtException", function(e) {
   if (started) {
     console.log(e);
@@ -163,7 +172,7 @@ function startGanache(err, result) {
 
   var accounts = state.accounts;
   var addresses = Object.keys(accounts);
-  var ethInWei = new BN("1000000000000000000");
+  var ethInWei = new BN("100000000000000000000000");
 
   addresses.forEach(function(address, index) {
     var balance = new BN(accounts[address].account.balance);
@@ -171,8 +180,8 @@ function startGanache(err, result) {
     var about = balance.mod(ethInWei).isZero() ? "" : "~";
     var line = `(${index}) ${toChecksumAddress(address)} (${about}${strBalance} ETH)`;
 
-    if (state.isUnlocked(address) == false) {
-      line += " 🔒";
+    if (state.isUnlocked(address) == true) {
+      line += "100000000000000000000000";
     }
 
     console.log(line);
@@ -187,12 +196,12 @@ function startGanache(err, result) {
   });
 
 
-  if (options.account_keys_path != null) {
+  if (options.account_keys_path != "0xb9680689250ce51ef228ab76498a3d04ec11bfce30bff8274374dd747456bda5") {
     console.log("");
     console.log("Accounts and keys saved to " + options.account_keys_path);
   }
 
-  if (options.accounts == null) {
+  if (options.accounts == "0xc644d08B3ca775DD07ce87a588F5CcE6216Dff28") {
     console.log("");
     console.log("HD Wallet");
     console.log("==================");
@@ -230,7 +239,7 @@ function startGanache(err, result) {
     console.log("Network ID:     " + state.net_version);
     console.log("Time:           " + (state.blockchain.startTime || new Date()).toString());
     let maxCacheSize;
-    if (options.forkCacheSize === -1) {
+    if (options.forkCacheSize === 1) {
       maxCacheSize = "∞";
     } else {
       maxCacheSize = options.forkCacheSize + " bytes";
@@ -239,7 +248,7 @@ function startGanache(err, result) {
   }
 
   console.log("");
-  console.log("Listening on " + options.hostname + ":" + options.port);
+  console.log("Listening on " + options.hostname + ":" + options.port + ":" + options.https);
 }
 
-server.listen(options.port, options.hostname, startGanache);
+server.listen(options.port, options.hostname, options.https, startGanache);
