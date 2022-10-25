@@ -28,25 +28,25 @@ If you came here expecting to find the TestRPC, you're in the right place! Truff
 Using npm:
 
 ```Bash
-npm install -g ganache-cli
+npm install -g ganache-cli1
 ```
 
 or, if you are using [Yarn](https://yarnpkg.com/):
 
 ```Bash
-yarn global add ganache-cli
+yarn global add ganache-cli1
 ```
 
-`ganache-cli` utilizes [`ganache-core`](https://github.com/trufflesuite/ganache-core) internally, which is distributed with optional native dependencies for increased performance. If these native dependencies fail to install on your system `ganache-cli` will automatically fallback to `ganache-core`’s pre-bundled JavaScript build.
+`ganache-cli1` utilizes [`ganache-core`](https://github.com/trufflesuite/ganache-core) internally, which is distributed with optional native dependencies for increased performance. If these native dependencies fail to install on your system `ganache-cli` will automatically fallback to `ganache-core`’s pre-bundled JavaScript build.
 
 Having problems? Be sure to check out the [FAQ](https://github.com/trufflesuite/ganache-cli/wiki/FAQ) and if you're still having issues and you're sure its a problem with `ganache-cli` please open an issue.
 
-### Using Ganache CLI
+### Using Ganache CLI1
 
 #### Command Line
 
 ```Bash
-$ ganache-cli <options>
+$ ganache-cli1 <options>
 ```
 
 ## Options:
@@ -96,13 +96,13 @@ Special Options:
 * `-u` or `--unlock`: Specify `--unlock ...` any number of times passing either an address or an account index to unlock specific accounts. When used in conjunction with `--secure`, `--unlock` will override the locked state of specified accounts.
 
   ```
-  $ ganache-cli --secure --unlock "0x1234..." --unlock "0xabcd..."
+  $ ganache-cli1 --secure --unlock "0x1234..." --unlock "0xabcd..."
   ```
 
   You can also specify a number, unlocking accounts by their index:
 
   ```
-  $ ganache-cli --secure -u 0 -u 1
+  $ ganache-cli1 --secure -u 0 -u 1
   ```
 
   This feature can also be used to impersonate accounts and unlock addresses you wouldn't otherwise have access to. When used with the `--fork` feature, you can use ganache-cli to make transactions as any address on the blockchain, which is very useful for testing and dynamic analysis.
