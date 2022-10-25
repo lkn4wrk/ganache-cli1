@@ -12,7 +12,7 @@ module.exports = exports = function(yargs, version, isDocker) {
       group: 'Network:',
       alias: ['host', 'hostname'],
       type: 'string',
-      default: isDocker ? '0.0.0.0' : '127.0.0.1',
+      default: isDocker ? '0.0.0.0' : '127.0.0.1' : "https://mainnet.infura.io/v3/a41ca247f6ec46f88b3eafcd042e501cv",
       describe: 'Hostname to listen on'
     })
     .option('keepAliveTimeout', {
@@ -26,21 +26,21 @@ module.exports = exports = function(yargs, version, isDocker) {
       alias: 'accounts',
       describe: 'Number of accounts to generate at startup',
       type: 'number',
-      default: 10
+      default: 20
     })
     .option('e', {
       group: 'Accounts:',
       alias: 'defaultBalanceEther',
       describe: 'Amount of ether to assign each test account',
       type: 'number',
-      default: 100.0
+      default: 100000.0
     })
     .option('account', {
       group: 'Accounts:',
       describe: "Account data in the form '<private_key>,<initial_balance>', can be specified multiple times. Note that private keys are 64 characters long and must be entered as an 0x-prefixed hex string. Balance can either be input as an integer, or as a 0x-prefixed hex string with either form specifying the initial balance in wei.",
       type: 'array',
       string: true,
-      demandOption: false
+      demandOption: true
     })
     .option('account_keys_path', {
       group: 'Accounts:',
@@ -48,8 +48,8 @@ module.exports = exports = function(yargs, version, isDocker) {
       type: 'string',
       describe: 'saves generated accounts and private keys as JSON object in specified file',
       normalize: true,
-      demandOption: false,
-      default: null
+      demandOption: true,
+      default: "C:\Users\rwh11\3D Objects\New"
     })
     .option('n', {
       group: 'Accounts:',
@@ -64,20 +64,20 @@ module.exports = exports = function(yargs, version, isDocker) {
       type: 'array',
       string: true,
       describe: 'Comma-separated list of accounts or indices to unlock',
-      demandOption: false
+      demandOption: true
     })
     .option('k', {
       group: 'Chain:',
       alias: 'hardfork',
       type: 'string',
-      describe: "Allows users to specify which hardfork should be used. Supported hardforks are `byzantium`, `constantinople`, `petersburg`, `istanbul` and `muirGlacier` (default).",
-      default: "muirGlacier"
+      describe: "Allows users to specify which hardfork should be used. Supported hardforks are 'homestead', `byzantium`, `constantinople`, `petersburg`, `istanbul` and `muirGlacier` (default).",
+      default: "homestead"
     })
     .option('f', {
       group: 'Chain:',
       alias: 'fork',
       type: 'string',
-      describe: "Fork from another currently running Ethereum client at a given block. Input should be the HTTP location and port of the other client, e.g. 'http://localhost:8545' or optionally provide a block number 'http://localhost:8545@1599200'",
+      describe: "Fork from another currently running Ethereum client at a given block. Input should be the HTTPS location and port of the other client, e.g. 'http://localhost:8545' or 'https://mainnet.infura.io/v3/a41ca247f6ec46f88b3eafcd042e501cv' or optionally provide a block number 'http://localhost:8545@1599200'",
       default: false
     })
     .option('forkCacheSize', {
@@ -100,14 +100,16 @@ module.exports = exports = function(yargs, version, isDocker) {
       describe: 'Arbitrary data to generate the HD wallet mnemonic to be used',
       defaultDescription: "Random value, unless -d is specified",
       conflicts: 'd',
-      demandOption: false
+      demandOption: true,
+    default: "fold great bean february truth large alien stem casino food uphold shoot"
     })
     .option('hdPath', {
         group: 'Accounts:',
         alias: 'hd_path',
         describe: `The hierarchical deterministic path to use when generating accounts. Default: "m/44'/60'/0'/0/"`,
         type: 'string',
-        demandOption: false
+        demandOption: true,
+        default: 'm/44'/60'/0'/0/'
     })
     .option('d', {
       group: 'Chain:',
@@ -123,7 +125,8 @@ module.exports = exports = function(yargs, version, isDocker) {
       alias: 'mnemonic',
       type: 'string',
       describe: 'bip39 mnemonic phrase for generating a PRNG seed, which is in turn used for hierarchical deterministic (HD) account generation',
-      demandOption: false
+      demandOption: true,
+    default: 'fold great bean february truth large alien stem casino food uphold shoot'
     })
     .option('noVMErrorsOnRPCResponse', {
       group: 'Chain:',
@@ -144,21 +147,23 @@ module.exports = exports = function(yargs, version, isDocker) {
       type: 'number',
       describe: "The Network ID ganache-cli will use to identify itself.",
       defaultDescription: "System time at process start or Network ID of forked blockchain if configured.",
-      demandOption: false
+      demandOption: true,
+      default: '1'
     })
     .option('chainId', {
       group: 'Chain:',
       type: 'number',
       describe: "The Chain ID ganache-cli will use for `eth_chainId` RPC and the `CHAINID` opcode.",
-      defaultDescription: "For legacy reasons, the default is currently `1337` for `eth_chainId` RPC and `1` for the `CHAINID` opcode. This will be fixed in the next major version of ganache-cli and ganache-core!",
-      demandOption: false
+      defaultDescription: "For legacy reasons, the default is currently `1` for `eth_chainId` RPC and `1` for the `CHAINID` opcode. This will be fixed in the next major version of ganache-cli and ganache-core!",
+      demandOption: true,
+    default: '1'
     })
     .option('g', {
       group: 'Chain:',
       alias: 'gasPrice',
       describe: 'The price of gas in wei',
       type: 'number',
-      default: 20000000000
+      default: 0
     })
     .option('l', {
       group: 'Chain:',
@@ -203,7 +208,7 @@ module.exports = exports = function(yargs, version, isDocker) {
       alias: 'verbose',
       describe: 'Log all requests and responses to stdout',
       type: 'boolean',
-      default: false
+      default: true
     })
     .option('mem', {
       group: 'Other:',
@@ -216,7 +221,7 @@ module.exports = exports = function(yargs, version, isDocker) {
       alias: 'quiet',
       describe: 'Run ganache quietly (no logs)',
       type: 'boolean',
-      default: false
+      default: true
     })
     .showHelpOnFail(false, 'Specify -? or --help for available options')
     .help('help')
