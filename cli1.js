@@ -10,7 +10,7 @@ var ganache;
 try {
   ganache = require("./lib");
 } catch(e) {
-  ganache = require("./build/ganache-core.node.cli.js");
+  ganache = require("./build/ganache-core.node.cli1.js");
 }
 var to = ganache.to;
 var initArgs = require("./args")
