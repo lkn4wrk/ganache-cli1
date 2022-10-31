@@ -2,7 +2,7 @@ const { resolve } = require("path");
 const plugins = require("./plugins");
 
 const outputDir = resolve(__dirname, "../build");
-const outputFilename = "ganache-core.node.cli.js";
+const outputFilename = "ganache-core.node.cli1.js";
 module.exports = {
   entry: [
     "./lib.js"
@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: outputDir,
     filename: outputFilename,
-    library: "Ganache-Cli",
+    library: "Ganache-Cli1",
     libraryTarget: "umd",
     umdNamedDefine: true
   },
