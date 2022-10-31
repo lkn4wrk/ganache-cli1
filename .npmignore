@@ -4,8 +4,8 @@
 .vscode
 .eslintrc.js
 *.log
-build/ganache-core.docker.cli.js
-build/ganache-core.docker.cli.js.map
+build/ganache-core.docker.cli1.js
+build/ganache-core.docker.cli1.js.map
 webpack
 .dockerignore
 Dockerfile
