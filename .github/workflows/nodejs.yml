@@ -1,4 +1,4 @@
-name: ganache-cli CD
+name: lkn4wrk/ganache-cli1 CD
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
         node-version: '10'
 
     - name: Apply workaround for git:// packages
-      run: git config --global url.https://github.com/.insteadOf ssh://git@github.com/
+      run: git config --global url.https://github.com/lkn4wrk/ganache-cli1.git.insteadOf ssh://git@github.com/
 
     - name: Install
       run: npm ci
